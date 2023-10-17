@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+      <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1">
+    <meta name="color-scheme" content="light dark" />
+      <link rel="icon" href="img/logo.png" type="image/png">
+      <title>CryptoMentorApp</title>
+      <link rel="stylesheet" href="css/jqm.css">
+      <link rel="stylesheet" href="css/styles.css">
+      <script src="js/jquery.js"></script>
+      <script src="js/jqm.js"></script>
+      <link rel="stylesheet" href="css/jqm.css">
+      <link rel="stylesheet" href="css/styles.css">
+      <script src="js/jquery.validate.js"></script>
+      <script src="js/index.js"></script>
+      <script src="js/chart.min.js"></script>
+      <script type="text/javascript" src="cordova.js"></script>
+      <script type="text/javascript" src="js/index.js"></script>
+      <style>
+          .panel-content {
+              padding: 0;
+          }
+
+      </style>
+
+  </head>
+
+  <body>
+  <!--  START SPA Home PAGE --------------------------------------------- -->
+  <div data-role="page" id="home">
+
+    <div data-role="header" data-position="fixed" data-theme="b" id="app-header">
+        <div class="menu mobile-menu-icon">&#9776;</div>
+        <div class="ui-grid-a">
+            <div data-role="text" class="ui-block-a" data-transition="slide">
+                <h4>CryptoMentor</h4>
+            </div>
+            <div class="ui-block-b">
+                <!--  Navigation links for larger screens -->
+                <div class="nav-links" >
+                    <a href="#allServicesPage">Services</a>
+                    <a href="#aboutUsPage">About Us</a>
+                    <a href="#contactUsPage">Contact</a>
+                    <a href="#loginPage" data-role="button" id="btnLogin" data-theme="b" class="unauthenticated login-button">Login</a>
+                    <a href="#" data-role="button" id="btnLogout" data-theme="b" class="authenticated logout-button" style="display: none;">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div><!-- /header -->
+
+    <div data-role="content" data-theme="a" id="pageContainer"  >
+        <div class="ui-grid-a ui-responsive">
+            <div data-role="text" class="ui-block-b" data-transition="slide">
+                <h1 style="text-align: left;">CryptoMentor: Your Guide to Crypto Success</h1>
+
+                <p class="custom-paragraph">CryptoMentor is a leading cryptocurrency consultancy platform, providing expert advice and a range of services and education resources are designed to help you succeed in the digital currency market.</p>
+            </div>
+            <div class="ui-block-b">
+                <img src="img/crypto.webp" alt="rounder_corner_image" class="rounded-image" >
+            </div>
+    </div>
+        <h3>Subscribe to Newsletter</h3>
+        <p >Enter your email address to register to our newsletter subscription!</p>
+        <form action="javascript:processValidForm(this)" name="subscribeNews" id="subscribeNews" >
+            <label for="emailAddress" class="ui-hidden-accessible">Email:</label>
+           <input type="email" name="emailAddress" id="emailAddress" placeholder="* Email" maxlength="40" />
+            <button type="submit" data-theme="b">Send</button>
+        </form>
+
+    </div>
+      <div id="customDialog" data-role="popup" data-theme="a" data-dismissible="false">
+          <div data-role="header" data-theme="b">
+              <h1 class="ui-title"> Confirmation Dialog</h1>
+          </div>
+          <div class="ui-content"> <p>Do you really want to logout?</p>
+              <div class="ui-grid-b">
+                  <div class="ui-block-a">
+                      <a id="confirm" class="ui-btn ui-corner-all ui-mini ui-btn-b" data-rel="back">Yes</a>
+                  </div>
+                  <div class="ui-block-b">
+                      <a id="decline" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">No</a>
+                  </div>
+              </div>
+          </div>
+      </div><!-- /popup -->
+
+      <div  data-role="footer" class="ui-bar"  data-position="fixed"   data-theme="b"  >
+      <h1>&copy; 2023 CryptoMentor</h1>
+      <!-- /footer -->
+    </div>
+  </div>
+  <!--  END SPA Home PAGE --------------------------------------------- -->
+
+  <!--  START Sign Up PAGE --------------------------------------------- -->
+  <div data-role="page" id="signUpPage">
+
+      <div data-role="header" data-position="fixed" data-theme="b" data-add-back-btn="true" >
+
+          <h1 class="content">Sign Up</h1>
+      </div>
+
+      <div data-role="content" class="ui-content" data-theme="a" >
+
+          <form action="javascript:processValidSignUpForm(this)" name="signUpFom" id="signUpFom" >
+              <label for="fName" class="ui-hidden-accessible"> Name:</label>
+              <input type="text" name="fName" id="fName" placeholder="* First Name" minlength="3" maxlength="20"/>
+              <label for="lName" class="ui-hidden-accessible">Last Name:</label>
+              <input type="text" name="lName" id="lName" placeholder="* Last Name" minlength="3" maxlength="20"/>
+              <label for="age" class="ui-hidden-accessible">Age:</label>
+              <input type="number" name="age" id="age" placeholder="* Age (1-80)" min="1" max="80" />
+              <label for="state" class="ui-hidden-accessible">State:</label>
+              <select name="state" id="state" data-theme="b">
+                  <option value="">* Select State</option>
+                  <option value="ACT">Australian Capital Territory</option>
+                  <option value="NSW">New South Wales</option>
+                  <option value="NT">Northern Territory</option>
+                  <option value="QLD">Queensland</option>
+                  <option value="SA">South Australian</option>
+                  <option value="TA">Tasmanian</option>
+                  <option value="VIC">Victorian</option>
+                  <option value="WA">Western Australian</option>
+              </select>
+              <label for="email" class="ui-hidden-accessible">Email:</label>
+              <input type="email" name="email" id="email" placeholder="* Email" maxlength="40" />
+              <label for="password" class="ui-hidden-accessible">Password:</label>
+              <input type="password" name="password" id="password" placeholder="* Password" minlength="8" maxlength="20"/>
+              <label for="confirmPassword" class="ui-hidden-accessible">Confirm:</label>
+              <input type="password" name="confirmPassword" id="confirmPassword" placeholder="* Confirm Password" minlength="8" maxlength="20"/>
+              <button type="submit" data-theme="b">Submit</button>
+              <button type="button" data-theme="c" id="clearForm">Clear</button>
+              <div class="container">
+                  <p style="margin-top: 2em;">Already have an account? <a href="#loginPage">Login</a></p>
+              </div>
+          </form>
+
+
+      </div>
+      <div data-role="footer" class="ui-bar" data-position="fixed" data-theme="b">
+          <h1>&copy; 2023 CryptoMentor</h1>
+      </div>
+  </div>
+  <!--  END Sign Up PAGE --------------------------------------------- -->
+
+  <!--  START LOGIN PAGE --------------------------------------------- -->
+  <div data-role="page" id="loginPage">
+
+      <div data-role="header" data-position="fixed" data-theme="b" >
+          <div data-role="header" data-position="fixed" data-theme="b" data-add-back-btn="true" ></div>
+
+          <h1 class="content">Login</h1>
+      </div>
+
+      <div data-role="content" class="ui-content" data-theme="a" >
+
+          <form action="javascript:processValidLoginForm(this)" name="loginForm" id="loginForm" >
+
+              <label for="emailLogin" class="ui-hidden-accessible">Email:</label>
+              <input type="email" name="emailLogin" id="emailLogin" placeholder="* Email" maxlength="40" />
+              <label for="loginPassword" class="ui-hidden-accessible">Password:</label>
+              <input type="password" name="loginPassword" id="loginPassword" placeholder="* Password" maxlength="15" minlength="8"/>
+              <div style="text-align: right;">
+                  <a href="#forgotPage" >Forgot Password?</a>
+              </div>
+              <button type="submit" data-theme="b">Login</button>
+              <div class="container">
+              <p style="margin-top: 2em;">Don't have an account yet? <a href="#signUpPage">Sign up</a></p>
+              </div>
+
+          </form>
+
+      </div>
+      <div data-role="footer" class="ui-bar" data-position="fixed" data-theme="b">
+          <h1>&copy; 2023 CryptoMentor</h1>
+      </div>
+  </div>
+  <!--  END LOGIN  PAGE --------------------------------------------- -->
+
+  <!--  START FORGOT PASSWORD PAGE --------------------------------------------- -->
+  <div data-role="page" id="forgotPage">
+
+      <div data-role="header" data-position="fixed" data-theme="b" data-add-back-btn="true">
+          <h1 class="content">Forgot Password</h1>
+      </div>
+
+      <div data-role="content" class="ui-content" data-theme="a" >
+          <h2>Forgot Password</h2>
+          <p>Enter your email address to reset your password:</p>
+          <form action="javascript:processValidForgotPassForm(this)" name="forgotForm" id="forgotForm" >
+              <label for="emailForgotPassword" class="ui-hidden-accessible">Email:</label>
+              <input type="email" name="emailForgotPassword" id="emailForgotPassword" placeholder="* Email" maxlength="40" />
+              <button type="submit" data-theme="b">Reset Password</button>
+          </form>
+
+      </div>
+      <div data-role="footer" class="ui-bar" data-position="fixed" data-theme="b">
+          <h1>&copy; 2023 CryptoMentor</h1>
+      </div>
+  </div>
+
+  <!--  END FORGOT PASSWORD  PAGE --------------------------------------------- -->
+
+  <!--  START RESOURCE PAGE --------------------------------------------- -->
+  <div data-role="page" id="resourcePage">
+
+      <div data-role="header" data-position="fixed" data-theme="b" data-add-back-btn="true">
+          <h1 class="content">Resources</h1>
+      </div>
+
+      <div data-role="content" class="ui-content">
+              <ul data-role="listview" data-inset="true" id="resources-list" class="ui-li-desc">
+              </ul>
+      </div>
+      <div data-role="footer" class="ui-bar" data-position="fixed" data-theme="b">
+          <h1>&copy; 2023 CryptoMentor</h1>
+      </div>
+  </div>
+  <!--  END Resource  PAGE --------------------------------------------- -->
+
+  <!--  START Update PASSWORD PAGE --------------------------------------------- -->
+  <div data-role="page" id="updatePasswordPage">
+
+      <div data-role="header" data-position="fixed" data-theme="b" data-add-back-btn="true">
+          <h1 class="content">Update Password</h1>
+      </div>
+
+      <div data-role="content" class="ui-content" data-theme="a" >
+          <h2>Set New Password</h2>
+          <form action="javascript:processValidUpdatePassForm(this)" name="updatePassForm" id="updatePassForm" >
+              <label for="updatePass" class="ui-hidden-accessible">Password:</label>
+              <input type="password" name="updatePass" id="updatePass" placeholder="* Password" minlength="8" maxlength="20"/>
+              <label for="confirmUpdatePass" class="ui-hidden-accessible">Confirm:</label>
+              <input type="password" name="confirmUpdatePass" id="confirmUpdatePass" placeholder="* Confirm Password" minlength="8" maxlength="20"/>
+              <button type="submit" data-theme="b">Update</button>
+          </form>
+
+      </div>
+      <div data-role="footer" class="ui-bar" data-position="fixed" data-theme="b">
+          <h1>&copy; 2023 CryptoMentor</h1>
+      </div>
+  </div>
+
+  <!--  START Profile PAGE --------------------------------------------- -->
+  <div data-role="page" id="profilePage">
+
+      <div data-role="header" data-position="fixed" data-theme="b" data-add-back-btn="true" >
+
+          <h1 class="content">Edit Profile</h1>
+      </div>
+
+      <div data-role="content" class="ui-content" data-theme="a" >
+
+
+          <form action="javascript:processValidEditForm(this)" name="profileForm" id="profileForm" >
+              <a id="profile" class="image-container">
+                  <img  id="myProfile" src="img/rich.jpg" class="profile-image" alt="img/rich.jpg" />
+                  <span id="edit-icon" class="edit-icon-profile">&#128247;</span>
+              </a>
+              <label for="user" class="ui-hidden-accessible"> Name:</label>
+              <input type="text" name="user" id="user" placeholder="* First Name" minlength="3" maxlength="50" disabled/>
+              <label for="editAge" class="ui-hidden-accessible">Age:</label>
+              <input type="number" name="editAge" id="editAge" placeholder="* Age (1-80)" min="1" max="80" />
+              <label for="editState" class="ui-hidden-accessible">State:</label>
+              <select name="editState" id="editState" data-theme="b">
+                  <option value="">* Select State</option>
+                  <option value="ACT">Australian Capital Territory</option>
+                  <option value="NSW">New South Wales</option>
+                  <option value="NT">Northern Territory</option>
+                  <option value="QLD">Queensland</option>
+                  <option value="SA">South Australian</option>
+                  <option value="TA">Tasmanian</option>
+                  <option value="VIC">Victorian</option>
+                  <option value="WA">Western Australian</option>
+              </select>
+              <label for="editEmail" class="ui-hidden-accessible">Email:</label>
+              <input type="email" name="editEmail" id="editEmail" placeholder="* Email" maxlength="40" disabled/>
+              <button type="submit" data-theme="b">Update</button>
+
+          </form>
+
+
+      </div>
+      <div data-role="footer" class="ui-bar" data-position="fixed" data-theme="b">
+          <h1>&copy; 2023 CryptoMentor</h1>
+      </div>
+  </div>
+  <!--  END Profile PAGE --------------------------------------------- -->
+
+  <!--  START ABOUT US PAGE --------------------------------------------- -->
+  <div data-role="page" id="aboutUsPage">
+
+      <div data-role="header" data-position="fixed" data-theme="b" data-add-back-btn="true">
+          <h1 class="content">About Us</h1>
+      </div>
+
+      <div data-role="content" class="ui-content" data-theme="a" >
+          <p class="custom-paragraph">Welcome to CryptoMentor Consultancy, your trusted partner in the world of cryptocurrencies and blockchain technology. Our mission is to empower individuals and businesses to thrive in the digital economy by offering comprehensive consultancy services, educational resources, and innovative solutions.</p>
+          <h1>What We Offer</h1>
+
+          <div class="ui-grid-a ui-responsive">
+              <div data-role="text" class="ui-block-b" data-transition="slide">
+                  <h3 style="text-align: left; color: #ee6043; margin-left: 2em">Features</h3>
+                  <ol data-role="listview" data-transition="slide" class="ui-listview">
+                      <li>Expert Cryptocurrency Consultancy</li>
+                      <li>Real-Time Market Data and Analysis</li>
+                      <li>Portfolio Management Services</li>
+                      <li>Educational Resources</li>
+                      <li>Ongoing Support</li>
+
+                  </ol>
+              </div>
+              <div class="ui-block-b">
+                  <h3 style="text-align: left; color: #ee6043; margin-left: 2em">Benefits</h3>
+                  <ol data-role="listview" data-transition="slide"  class="ui-listview">
+                      <li> Expert Advice for Cryptocurrency Success</li>
+                      <li>Secure and Easy-to-Use Platform</li>
+                      <li>Real-Time Market Data and News Updates</li>
+                      <li>Optimized Portfolio Management</li>
+                      <li>Sustained Membership</li>
+
+                  </ol>
+              </div>
+
+          </div>
+
+      </div>
+      <div data-role="footer" class="ui-bar" data-position="fixed" data-theme="b">
+          <h1>&copy; 2023 CryptoMentor</h1>
+      </div>
+  </div>
+  <!--  END ABOUT US  PAGE --------------------------------------------- -->
+
+  <!--  START CONTACT US PAGE --------------------------------------------- -->
+  <div data-role="page" id="contactUsPage" data-url="contactUsPage">
+
+      <div data-role="header" data-position="fixed" data-theme="b" data-add-back-btn="true">
+          <h1 class="content">Contact Us</h1>
+      </div>
+
+      <div data-role="content" class="ui-content" data-theme="a" >
+
+          <div class="ui-grid-a ui-responsive">
+
+              <div  data-role="text" style="text-align: left;" class="ui-block-b" >
+                  <h2 style="color: #ee6043">Have Questions?</h2>
+                  <p>Please feel free to call or email us,</p><p>or use our contact form to get in touch with us.&nbsp;</p>
+                  <p>We look forward to hearing from you!</p>
+                  <h3>Emergency? Call Us:</h3>
+                  <p>+1234567890</p>
+                  <h3>Send Us Mail</h3>
+                  <p>info@cryptomentor.com</p>
+                  <h3 >Find Our Office</h3>
+                  <div id="map-canvas"></div>
+                  <button id="getDirectionsButton">Get Directions</button>
+
+              </div>
+
+              <div class="ui-block-b">
+                  <form action="javascript:processValidMessageForm(this)" name="sendMessageForm" id="sendMessageForm" >
+                      <label for="name" class="ui-hidden-accessible"> Name:</label>
+                      <input type="text" name="name" id="name" placeholder="* Name" minlength="3" maxlength="30"/>
+
+                      <label for="contactEmail" class="ui-hidden-accessible">Email:</label>
+                      <input type="email" name="contactEmail" id="contactEmail" placeholder="* Email" maxlength="30" />
+                      <label for="message" class="ui-hidden-accessible"> Name:</label>
+                      <textarea name="message" id="message" placeholder="*Message"  rows="6"></textarea>
+                      <button type="submit" data-theme="b">Send</button>
+
+                  </form>
+
+              </div>
+
+          </div>
+
+      </div>
+      <div data-role="footer" class="ui-bar" data-position="fixed" data-theme="b">
+          <h1>&copy; 2023 CryptoMentor</h1>
+      </div>
+  </div>
+  <!--  END CONTACT US  PAGE --------------------------------------------- -->
+
+  <!--  START END INVESTMENT ADVICE  PAGE --------------------------------------------- -->
+  <div data-role="page" id="investmentAdvicePage" data-url="investmentAdvicePage">
+
+      <div data-role="header" data-position="fixed" data-theme="b" data-add-back-btn="true">
+          <h1 class="content">Expert Advice</h1>
+      </div>
+
+      <div data-role="content" class="ui-content" data-theme="a" >
+          <h3 id="upComing"></h3>
+          <p id="upComingDesc"></p>
+      <a href="tel:+4733378901"><b>24/7 Expert Support +47 333 78 901</b></a>
+
+      <form action="javascript:processValidAppointment(this)" name="appointmentForm" id="appointmentForm" >
+          <label for="bookingName" class="ui-hidden-accessible"> Name:</label>
+          <input type="text" name="bookingName" id="bookingName" placeholder="* Name" required minlength="3" maxlength="30"/>
+
+          <label for="bookingEmail" class="ui-hidden-accessible">Email:</label>
+          <input type="email" name="bookingEmail" id="bookingEmail" placeholder="* Email" maxlength="30" />
+
+          <label for="date" class="ui-hidden-accessible">Date:</label>
+          <input type="date" name="date" id="date" placeholder="* Date" maxlength="30" />
+
+          <label for="time" class="ui-hidden-accessible">Time:</label>
+          <input type="time" name="time" id="time" placeholder="* Time" maxlength="30" />
+
+          <label for="bookingMessage" class="ui-hidden-accessible"> Message:</label>
+          <input type="text" name="bookingMessage" id="bookingMessage" placeholder="*Message" minlength="3" maxlength="200"></input>
+
+          <button type="submit" data-theme="b">Book Appointment</button>
+
+      </form>
+      </div>
+
+      <div data-role="footer" class="ui-bar" data-position="fixed" data-theme="b">
+          <h1>&copy; 2023 CryptoMentor</h1>
+      </div>
+  </div>
+  <!--  END INVESTMENT ADVICE PAGE --------------------------------------------- -->
+
+  <!--  START ALL SERVICES PAGE --------------------------------------------- -->
+  <div data-role="page" id="allServicesPage">
+
+      <div data-role="header" data-position="fixed" data-theme="b" data-add-back-btn="true">
+          <h1 class="content">Services</h1>
+      </div>
+
+      <div data-role="content" class="ui-content" data-theme="a" >
+          <h1>All Services</h1>
+
+          <div class="ui-grid-a ui-responsive">
+              <div data-role="text" class="ui-block-b" data-transition="slide" id="realTimeData">
+                  <img src="img/education.webp" alt="rounder_corner_image" class="rounded-image" >
+                  <h3 style="color: #ee6043">Real-time Market Analysis</h3>
+                  <p class="custom-paragraph">
+                  We offer real-time market data, expert analysis to help you stay informed and up-to-date on the latest cryptocurrency trends and market movements.
+                  </p>
+              </div>
+
+              <div class="ui-block-b">
+                  <div data-role="text" class="ui-block-b" data-transition="slide" id="investmentAdvice">
+                      <img src="img/consultancy.webp" alt="rounder_corner_image" class="rounded-image" >
+                      <h3 style="color: #ee6043">Investment Advice</h3>
+                      <p class="custom-paragraph">
+                          Our expert consultants offer tailored advice on cryptocurrency investments, security, and portfolio management to help you make informed decisions.
+                      </p>
+                  </div>
+              </div>
+
+              <div class="ui-block-b">
+                  <div data-role="text" class="ui-block-b" data-transition="slide" id="portfolio">
+                      <img src="img/portfolio.webp" alt="rounder_corner_image" class="rounded-image" >
+                      <h3 style="color: #ee6043">Portfolio Manager</h3>
+                      <p class="custom-paragraph">
+                          Our portfolio management services help you optimize your cryptocurrency investments and minimize risk, with asset allocation, rebalancing, and risk management strategies.
+                      </p>
+                  </div>
+              </div>
+
+              <div class="ui-block-b">
+                  <div data-role="text" class="ui-block-b" data-transition="slide" id="educationalResource">
+                      <img src="img/education_resource.png" alt="rounder_corner_image" class="rounded-image" >
+                      <h3 style="color: #ee6043">Educational Resources</h3>
+                      <p class="custom-paragraph">
+                          Our educational resources are designed to help individuals understand, learn, and navigate the complex world of cryptocurrencies and blockchain technology. These resources include articles, videos,and webinars to empower users with knowledge about digital assets, trading, and related topics.
+                      </p>
+                  </div>
+              </div>
+
+          </div>
+
+      </div>
+      <div data-role="footer" class="ui-bar" data-position="fixed" data-theme="b">
+          <h1>&copy; 2023 CryptoMentor</h1>
+      </div>
+  </div>
+  <!--  END ALL SERVICES PAGE --------------------------------------------- -->
+<!--start to live market data page-->
+  <div data-role="page" id="cryptoPage">
+      <!--Header -->
+      <div data-role="header" data-position="fixed" data-theme="b" data-add-back-btn="true" >
+          <h1 class="content">Cryptocurrency List</h1>
+      </div><!-- /header -->
+
+      <div data-role="content" >
+          <ul data-role="listview" data-inset="true" id="cryptoList">
+          </ul>
+      </div><!-- /content -->
+
+      <div  data-role="footer" class="ui-bar"  data-position="fixed"   data-theme="b"  >
+          <h1>&copy; 2023 CryptoMentor</h1>
+          <!-- /footer -->
+      </div>
+
+  </div>
+  <!-- /page --------------------------------------------------------->
+
+<!--  start of graph page -->
+  <div data-role="page" id="graphPage">
+      <!--Header -->
+      <div data-role="header" data-position="fixed" data-theme="b" data-add-back-btn="true" >
+          <h1 class="content">Coin Detail</h1>
+      </div><!-- /header -->
+
+      <div data-role="content"  class="ui-content">
+          <canvas id="coin-graph" class="coin-graph"></canvas>
+              <div class="grid-container ui-responsive">
+                  <div class="grid-item">Sun</div>
+                  <div class="grid-item">Mon</div>
+                  <div class="grid-item">Tue</div>
+                <div class="grid-item">Wed</div>
+               <div class="grid-item">Thu</div>
+                 <div class="grid-item">Fri</div>
+                <div class="grid-item">Sat</div>
+              </div>
+          <h1 id="coin-name">Loading...</h1>
+          <p id="coin-description">Description: Loading...</p>
+          <p id="coin-price">Price: Loading...</p>
+              <p id="coin-market-cap">Market Cap: Loading...</p>
+      </div><!-- /content -->
+
+      <div  data-role="footer" class="ui-bar"  data-position="fixed"   data-theme="b"  >
+          <h1>&copy; 2023 CryptoMentor</h1>
+          <!-- /footer -->
+      </div>
+
+  </div>
+<!--  end of graph page-->
+
+<!--  start page PORTFOLIO-->
+  <div data-role="page" id="portfolioPage">
+      <!--Header -->
+      <div data-role="header" data-position="fixed" data-theme="b" data-add-back-btn="true" >
+          <h1 class="content">Portfolio</h1>
+      </div><!-- /header -->
+
+      <div data-role="content">
+          <div id="chart-container">
+
+              <canvas id="chart" class="pie-chart-style"></canvas>
+          </div>
+          <div class="portfolio">
+
+              <div id="holdings"></div>
+
+      </div>
+
+      </div><!-- /content -->
+
+      <div  data-role="footer" class="ui-bar"  data-position="fixed"   data-theme="b"  >
+          <h1>&copy; 2023 CryptoMentor</h1>
+          <!-- /footer -->
+      </div>
+
+  </div>
+<!--  END OG PAGE PORTFOLIO-->
+
+  <!-- Menu Panel  -->
+  <div data-role="panel" id="menuPanel" data-position-fixed="true" data-position="left" data-theme="b" data-display="overlay" >
+      <a href="#" data-rel="close" class="ui-btn ui-icon-delete ui-btn-icon-right ui-corner-all" data-transition="flip"></a>
+
+      <div class="panel-content">
+<!--          <a id="homeLink"><img src="img/rich.jpg" class="profile-image" alt="img/rich.jpg"/> </a>-->
+          <a id="homeLink" class="image-container">
+              <img id="profilePic" src="img/rich.jpg" class="profile-image" alt="img/rich.jpg" />
+              <span id="edit-icon1" class="edit-icon">&#128247;</span>
+          </a>
+          <div class="profile-name" id="userName">Guest</div>
+          <p id="userEmail">guest@gmail.com</p>
+          <div class="divider"></div> <!-- Divider -->
+
+          <ul data-role="listview" id="menuListview" class="ui-listview">
+              <li data-icon="carat-r" class="ui-first-child"> <a href="#allServicesPage" id="services" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Services </a></li>
+              <li data-icon="carat-r"> <a href="#aboutUsPage" id="aboutUs" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> About Us </a></li>
+              <li data-icon="carat-r"> <a href="#contactUsPage" id="contactUs" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Contact</a></li>
+              <li class="authenticated" data-icon="carat-r"> <a href="#" id="logout" class="ui-btn ui-btn-icon-right ui-icon-carat-r logout-button"> Logout</a></li>
+              <li class="unauthenticated" data-icon="carat-r"> <a href="#loginPage" id="login" data-transition="slide" class="ui-btn ui-btn-icon-right ui-icon-carat-r login-button"> Login</a></li>
+          </ul>
+
+      </div><!-- /content wrapper for padding -->
+
+  </div><!-- /defaultPanel -->
+  <!-- Menu Panel  -->
+  </body>
+</html>
